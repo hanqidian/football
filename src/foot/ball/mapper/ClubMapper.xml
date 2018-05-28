@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="foot.ball.mapper.ClubMapper">
+
+	<select id="getByClubType" parameterType="String" resultType="Club">
+		SELECT * FROM F_CLUB WHERE CLUBTYPE=#{clubType} ORDER BY CLUBSCORE DESC
+	</select>
+	
+	<insert id="add" parameterType="Club">
+		INSERT INTO F_CLUB VALUES(#{clubId},#{clubName},#{clubType},#{clubWin},#{clubTie},#{clubLose},#{clubGoal},#{clubFumble},#{clubScore},#{gameCount})
+	</insert>
+	
+	<select id="getByClubId" parameterType="String" resultType="Club">
+		SELECT * FROM F_CLUB WHERE CLUBID=#{clubId}
+	</select>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM F_CLUB WHERE CLUBID=#{clubId}
+	</delete>
+	
+	<update id="update" parameterType="Club">
+		UPDATE F_CLUB SET CLUBWIN=#{clubWin},CLUBTIE=#{clubTie},CLUBLOSE=#{clubLose},CLUBGOAL=#{clubGoal},CLUBFUMBLE=#{clubFumble},
+		GAMECOUNT=#{gameCount},CLUBSCORE=#{clubScore} WHERE CLUBID=#{clubId}
+	</update>
+
+</mapper>

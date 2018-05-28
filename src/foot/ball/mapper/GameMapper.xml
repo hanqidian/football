@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="foot.ball.mapper.GameMapper"> 
+	
+	<select id="getImportantGame" resultType="Game">
+		SELECT * FROM(SELECT * FROM F_GAME WHERE GAMESTATE IN('A','B','C','D') ORDER BY GAMETIME) WHERE ROWNUM IN(1,2,3,4,5,6,7,8,9,10)
+	</select>
+	
+	<select id="getAll" resultType="Game">
+		SELECT * FROM F_GAME ORDER BY GAMETIME DESC
+	</select>
+	
+	<insert id="add" parameterType="Game">
+		INSERT INTO F_GAME VALUES(#{gameId},#{homeTeam},#{guestTeam},#{goal},#{fumble},#{gameType},#{gameState},#{gameTime})
+	</insert>
+	
+	<select id="getById" parameterType="String" resultType="Game">
+		SELECT * FROM F_GAME WHERE GAMEID=#{gameId}
+	</select>
+	
+	<update id="update" parameterType="Game">
+		UPDATE F_GAME SET GOAL=#{goal},FUMBLE=#{fumble} WHERE GAMEID=#{gameId}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM F_GAME WHERE GAMEID=#{gameId}
+	</delete>
+	
+	<update id="updateGameState" parameterType="Game">
+		UPDATE F_GAME SET GAMESTATE=#{gameState} WHERE GAMEID=#{gameId}
+	</update>
+	
+	<select id="getByGameType" parameterType="String" resultType="Game">
+		SELECT * FROM F_GAME WHERE GAMETYPE=#{gameType} ORDER BY GAMETIME DESC
+	</select>
+	
+</mapper>

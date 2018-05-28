@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="foot.ball.mapper.NewsMapper">
+
+	<update id="update" parameterType="News">
+		UPDATE F_NEWS SET READCOUNT=#{readCount} WHERE NEWSID=#{newsId}
+	</update>
+
+	<insert id="add" parameterType="News">
+		INSERT INTO F_NEWS VALUES(#{newsId},#{newsTitle},#{newsContent},#{newsTime},#{newsWriter},#{readCount},#{pictureId},#{newsType},#{newsProperty})
+	</insert>
+
+	<select id="getAll" resultType="News">
+		SELECT * FROM F_NEWS ORDER BY NEWSTIME DESC
+	</select>
+	
+	<select id="getByNewsId" parameterType="String" resultType="News">
+		SELECT * FROM F_NEWS WHERE NEWSID=#{newsId}
+	</select>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM F_NEWS WHERE NEWSID=#{newsId}
+	</delete>
+	
+	<select id="getImportantByNewsTime" parameterType="String" resultType="News">
+		SELECT * FROM(SELECT * FROM F_NEWS WHERE NEWSTIME LIKE #{date} ORDER BY READCOUNT DESC)
+		WHERE ROWNUM IN(1,2,3,4,5,6,7,8,9,10)
+	</select>
+	
+	<select id="getByNewsProperty" resultType="News">
+		SELECT * FROM(SELECT * FROM F_NEWS WHERE NEWSPROPERTY='A' ORDER BY NEWSTIME DESC) WHERE ROWNUM IN(1,2,3,4)
+	</select>
+	
+	<select id="getTheMostImportantNews" resultType="News">
+		SELECT * FROM(SELECT * FROM F_NEWS WHERE NEWSPROPERTY='A' ORDER BY NEWSTIME DESC) WHERE ROWNUM=1
+	</select>
+	
+	<select id="getImportantNews" resultType="News">
+		SELECT * FROM(SELECT * FROM F_NEWS WHERE NEWSID NOT IN
+		(SELECT NEWSID FROM(SELECT NEWSID FROM F_NEWS WHERE NEWSPROPERTY='A' ORDER BY NEWSTIME DESC) WHERE ROWNUM=1)
+		ORDER BY NEWSTIME DESC) WHERE ROWNUM IN(1,2,3,4,5,6,7,8,9)
+	</select>
+	
+	<select id="getAllNews" resultType="News">
+		SELECT * FROM F_NEWS ORDER BY NEWSTIME DESC
+	</select>
+	
+	<select id="getByNewsType" parameterType="String" resultType="News">
+		SELECT * FROM F_NEWS WHERE NEWSTYPE=#{newsType} ORDER BY NEWSTIME DESC
+	</select>
+	
+</mapper>

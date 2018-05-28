@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="foot.ball.mapper.CommentMapper">
+
+	<insert id="add" parameterType="Comment">
+		INSERT INTO F_COMMENT VALUES(#{commentId},#{newsId},#{commentTime},#{commentText},#{commentWriter},#{readCount})
+	</insert>
+
+	<select id="getByNewsId" parameterType="String" resultType="Comment">
+		SELECT * FROM F_COMMENT WHERE NEWSID=#{newsId} ORDER BY READCOUNT,COMMENTTIME DESC
+	</select>
+	
+	<select id="getById" parameterType="String" resultType="Comment">
+		SELECT * FROM F_COMMENT WHERE COMMENTID=#{commentId}
+	</select>
+	
+	<update id="update" parameterType="Comment">
+		UPDATE F_COMMENT SET READCOUNT=#{readCount} WHERE COMMENTID=#{commentId}
+	</update>
+
+</mapper>

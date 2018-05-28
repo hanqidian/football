@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="foot.ball.mapper.LiveWordMapper"> 
+
+	<insert id="add" parameterType="LiveWord">
+		INSERT INTO F_LIVEWORD VALUES(#{liveId},#{gameId},#{liveTime},#{liveWord})
+	</insert>
+	
+	<select id="getByGameId" parameterType="String" resultType="LiveWord">
+		SELECT * FROM F_LIVEWORD WHERE GAMEID=#{gameId} ORDER BY LIVETIME DESC
+	</select>
+
+</mapper>

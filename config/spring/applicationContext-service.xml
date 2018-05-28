@@ -1,0 +1,25 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
+		
+		<bean id="userService" class="foot.ball.service.UserServiceImpl"/>
+		<bean id="newsService" class="foot.ball.service.NewsServiceImpl"/>
+		<bean id="clubService" class="foot.ball.service.ClubServiceImpl"/>
+		<bean id="gameService" class="foot.ball.service.GameServiceImpl"/>
+		<bean id="codeService" class="foot.ball.service.CodeServiceImpl"/>
+		<bean id="liveWordService" class="foot.ball.service.LiveWordServiceImpl"/>
+		<bean id="gifService" class="foot.ball.service.GifServiceImpl"/>
+		<bean id="commentService" class="foot.ball.service.CommentServiceImpl"/>
+		
+</beans>

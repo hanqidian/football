@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+	<!-- 包名.接口名 -->
+<mapper namespace="foot.ball.mapper.UserMapper">
+	
+	<insert id="add" parameterType="User">
+		INSERT INTO F_USER VALUES(#{userId},#{userName},#{password},#{userType})
+	</insert>
+	
+	<select id="getByUserName" parameterType="String" resultType="User">
+		SELECT * FROM F_USER WHERE USERNAME=#{userName}
+	</select>
+	
+	<select id="getByUserNameAndPassword" parameterType="String" resultType="User">
+		SELECT * FROM F_USER WHERE USERNAME=#{userName} AND PASSWORD=#{password}
+	</select>
+	
+	<select id="getAll" resultType="User">
+		SELECT * FROM F_USER WHERE USERTYPE='C' OR USERTYPE='D' OR USERTYPE='E'
+	</select>
+	
+	<select id="getByWarnCount" resultType="User">
+		SELECT * FROM F_USER WHERE WARNCOUNT>50 AND USERTYPE='C'
+	</select>
+	
+	<select id="getByUserType" resultType="User">
+		SELECT * FROM F_USER WHERE USERTYPE='E'
+	</select>
+	
+	<update id="lockByUserId" parameterType="String">
+		UPDATE F_USER SET USERTYPE='D' WHERE USERID=#{userId}
+	</update>
+	
+	<update id="deblockByUserId" parameterType="String">
+		UPDATE F_USER SET USERTYPE='C',WARNCOUNT=0 WHERE USERID=#{userId}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM F_USER WHERE USERID=#{userId}
+	</delete>
+	
+	<update id="update" parameterType="User">
+		UPDATE F_USER SET WARNCOUNT=#{warnCount},USERTYPE=#{userType} WHERE USERID=#{userId}
+	</update>
+	
+</mapper>
+	
